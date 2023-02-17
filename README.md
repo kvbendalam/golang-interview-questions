@@ -93,3 +93,18 @@ func main() {
 18. What is the difference between a slice and an array in Go?
 19. How do you handle dependencies in Go, and what are some tools that you can use for dependency management?
 20. What are some common concurrency patterns in Go, and how are they used?
+21. How to compare two slices in golang?
+22. How to compare two structs in golang?
+23. How to compare two maps in golang?
+24. What is the difference between parallelism and concurrency?
+25. What is statically typed languages?
+26. What is dynamically typed languages?
+27. What is race condition?
+28. What is defer in golang?
+29. What is panic in golang?
+30. What is the use of recover in golang?
+31. Type assertion in golang?
+32. what is rune in golang?
+33. what is pointer in golang?
+34. Object oriented principles in golang?
+35. 
