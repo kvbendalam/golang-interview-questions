@@ -68,7 +68,26 @@ func main() {
 }
 ```
 4. Write a program that takes a slice of integers and sorts them in ascending order.
+### Using Sort package
+```
+package main
 
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+	// Define an unsorted slice of integers
+	nums := []int{3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5}
+
+	// Sort the slice in ascending order
+	sort.Ints(nums)
+
+	// Print the sorted slice
+	fmt.Println(nums)
+}
+```
 4. Write a program that takes a slice of strings and removes all duplicates.
 
 5. Write a program that reads a file and counts the number of occurrences of each word in the file.
@@ -107,4 +126,110 @@ func main() {
 32. what is rune in golang?
 33. what is pointer in golang?
 34. Object oriented principles in golang?
-35. 
+35. Compiled programming vs Interpreted programming
+36. Question 1: Compare the two variables in golang . 
+	a = 10
+	b = 10
+37. Compare these two maps 
+	a = []int{1}
+	b = []int{1}
+38. Compare two maps
+	a = map[string]string{"A": "B"}
+	b = map[string]string{"A": "B"}
+39. Output of the following:
+a := []int{5, 7}
+b := []int{6, 6}
+check := a
+copy(a, b)
+fmt.Println(a, b, check)
+
+40. a := []int{5, 7}
+b := []int{6, 8}
+check := a
+a = b
+fmt.Println(a, b, check)
+
+41. Question: Arrange the key in sorted order:
+	fruits := map[string]int{
+		"oranges": 100,
+		"apples":  200,
+		"bananas": 300,
+	}
+```
+package main
+
+
+import (
+	"fmt"
+	"sort"
+)
+
+
+func main() {
+	values := map[string]int{
+		"cherry": 30,
+		"apple":  10,
+		"banana": 20,
+	}
+
+
+	keys := make([]string, 0, len(values))
+	for key := range values {
+		keys = append(keys, key)
+	}
+
+
+	sort.Strings(keys)
+	fmt.Println(keys)
+
+
+	for _, key := range keys {
+		fmt.Println(key, values[key])
+	}
+}
+
+```
+
+42. Question: 
+Implement WordCount. It should return a map of the counts of each “word” in the string s. 
+ 
+Bonus: The wc. Test function runs a test suite against the provided function and prints success or failure.
+
+
+PASS
+ f("I am learning Go!") = 
+  map[string]int{"Go!":1, "I":1, "am":1, "learning":1}
+PASS
+ f("The quick brown fox jumped over the lazy dog.") = 
+  map[string]int{"The":1, "brown":1, "dog.":1, "fox":1, "jumped":1, "lazy":1, "over":1, "quick":1, "the":1}
+PASS
+ f("I ate a donut. Then I ate another donut.") = 
+  map[string]int{"I":2, "Then":1, "a":1, "another":1, "ate":2, "donut.":2}
+PASS
+ f("A man a plan a canal panama.") = 
+  map[string]int{"A":1, "a":2, "canal":1, "man":1, "panama.":1, "plan":1}
+  
+  
+43. Type conversion from string to integers
+
+
+44. Create a pointer and store and type convert it
+
+
+45. How to run different applications in same port 
+
+
+46. How to optimize data base queries
+
+
+47. How to copy postgres table 
+
+
+48. How to write unit tests in golang
+
+
+
+
+
+
+
