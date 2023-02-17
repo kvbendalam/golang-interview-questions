@@ -240,7 +240,7 @@ func main() {
 }
 
 ```
-9. What is Go, and why was it created?
+8. What is Go, and why was it created?
 
 	Go, also known as Golang, is an open-source programming language developed by Google. It was first publicly announced in November 2009, and the first stable version, Go 1.0, was released in March 2012.
 
@@ -256,7 +256,7 @@ func main() {
 
 	Overall, Go was created to provide a modern and efficient language that can handle the challenges of large-scale software development, while still being simple and easy to learn. Its popularity has grown rapidly in recent years, with many companies and developers using it for a wide range of applications, including web development, systems programming, and machine learning.
 
-12. How does garbage collection work in Go, and what are some advantages and disadvantages of Go's garbage collector?
+9. How does garbage collection work in Go, and what are some advantages and disadvantages of Go's garbage collector?
 
 	Garbage collection in Go is a process by which the Go runtime manages memory allocation and deallocation for programs written in Go. The garbage collector runs automatically in the background, freeing up memory that is no longer being used by the program.
 
@@ -270,7 +270,7 @@ func main() {
 
 	Another disadvantage is that the garbage collector can sometimes introduce performance overhead, particularly in applications that have very high performance requirements. This can be addressed by tuning the garbage collector settings, but doing so requires a deeper understanding of how the garbage collector works.
 
-	13. What are channels in Go, and how are they used?
+10. What are channels in Go, and how are they used?
 	
 	In Go, channels are a powerful mechanism for synchronizing the execution of concurrent goroutines and passing data between them. Channels can be thought of as typed pipes that allow goroutines to send and receive values of a particular type.
 
@@ -278,12 +278,15 @@ func main() {
 	```
 	ch := make(chan int)
 	```
+	
 	This creates a channel ch that can be used to send and receive integer values. Values are sent on a channel using the <- operator, and received using the same operator with the channel name on the right-hand side:
 
+	
 	```
 	ch <- 42 // Send the value 42 on the channel
 	x := <-ch // Receive a value from the channel and store it in x
 	```
+	
 	Channels can be used to implement a wide range of concurrent patterns, such as producer-consumer, pipeline, and fan-out/fan-in. For example, in a producer-consumer pattern, a producer goroutine can send data on a channel, while one or more consumer goroutines receive the data and process it:
 
 	```
@@ -307,11 +310,12 @@ func main() {
 	    time.Sleep(1 * time.Second)
 	}
 	```
+	
 	In this example, the producer function sends integer values on the ch channel, while the consumer function receives the values and prints them to the console. The time.Sleep call at the end of the main function is used to give the goroutines time to execute before the program exits.
 
 	Channels in Go provide a safe and efficient way to coordinate the execution of concurrent goroutines and communicate between them, making it easier to write scalable and efficient concurrent programs.
 
-14. How do you handle errors in Go, and what are some best practices for error handling?
+11. How do you handle errors in Go, and what are some best practices for error handling?
 
 	In Go, errors are represented using the built-in error interface, which is defined as follows:
 
@@ -320,6 +324,7 @@ func main() {
 	    Error() string
 	}
 	```
+	
 	Functions in Go typically return an error as their last return value, which can be used to indicate whether the function succeeded or failed. To handle errors in Go, you can use the if err != nil idiom to check whether an error occurred, and take appropriate action based on the error:
 
 	```
@@ -330,6 +335,7 @@ func main() {
 	    // Use the result
 	}
 	```
+	
 	In Go, it is a best practice to handle errors explicitly, rather than ignoring them or passing them up the call stack. Some best practices for error handling in Go include:
 
 	Always check for errors: Make sure to check for errors and handle them appropriately. Ignoring errors can lead to unexpected behavior and hard-to-debug issues.
@@ -342,6 +348,7 @@ func main() {
 	    return fmt.Errorf("someFunction failed: %w", err)
 	}
 	```
+	
 	The %w verb is used to wrap the original error with additional context.
 
 	Return errors as values: Functions in Go should return errors as values, rather than panicking or logging the error and continuing. This makes it easier to handle errors and provides a clear indication of whether a function succeeded or failed.
@@ -349,6 +356,7 @@ func main() {
 	Don't use errors as control flow: Avoid using errors as a mechanism for control flow in your code, such as using a specific error to indicate a certain condition. This can make your code harder to read and maintain.
 
 	Use typed errors: Consider using typed errors instead of string errors to provide more information about the error. You can define your own error types by implementing the error interface:
+	
 	```
 	type MyError struct {
 	    Msg string
@@ -361,10 +369,11 @@ func main() {
 	
 	In summary, error handling in Go involves checking for errors explicitly, wrapping errors with additional context, returning errors as values, and avoiding the use of errors as control flow. By following these best practices, you can write more robust and maintainable Go code.
 	
-15. What is a goroutine in Go, and how does it differ from a thread?
+12. What is a goroutine in Go, and how does it differ from a thread?
+	
 	In Go, a goroutine is a lightweight, independently executing function that runs concurrently with other goroutines within the same address space. Goroutines are similar to threads in other programming languages, but they are implemented in a more lightweight and efficient way.
 
-In Go, a program starts with a single goroutine, which is created automatically when the program starts. Additional goroutines can be created using the go keyword followed by a function call, like this:
+	In Go, a program starts with a single goroutine, which is created automatically when the program starts. Additional goroutines can be created using the go keyword followed by a function call, like this:
 
 	```
 	func main() {
@@ -386,55 +395,58 @@ In Go, a program starts with a single goroutine, which is created automatically 
 
 	Overall, goroutines in Go provide a lightweight, efficient, and convenient way to write concurrent programs, making it easier to take advantage of multiple cores and improve the performance of your applications.
 
-17. Can you explain what closures are in Go, and how they work?
+13. Can you explain what closures are in Go, and how they work?
+	
 	In Go, a closure is a function value that references variables from outside its own scope. When a closure is created, it captures the variables it references and stores them in a data structure called a closure. The closure can then be passed around and executed independently, and it will still have access to the variables it captured, even if they are no longer in scope.
 
 	Here's an example of a closure in Go:
 
-```
-func adder() func(int) int {
-    sum := 0
-    return func(x int) int {
-        sum += x
-        return sum
-    }
-}
+	```
+	func adder() func(int) int {
+	    sum := 0
+	    return func(x int) int {
+		sum += x
+		return sum
+	    }
+	}
 
-func main() {
-    a := adder()
-    fmt.Println(a(1))  // prints 1
-    fmt.Println(a(2))  // prints 3
-    fmt.Println(a(3))  // prints 6
-}
+	func main() {
+	    a := adder()
+	    fmt.Println(a(1))  // prints 1
+	    fmt.Println(a(2))  // prints 3
+	    fmt.Println(a(3))  // prints 6
+	}
 
-```
+	```
+	
 	In this example, the adder function returns a closure that takes an int parameter and returns an int. The closure captures a variable called sum, which is initialized to 0 when adder is called. Each time the closure is called, it adds the input parameter to sum and returns the new value of sum.
 
 Closures in Go are often used for creating functions that generate other functions or for implementing functions with persistent state. For example, you could use a closure to implement a counter that remembers its state between calls:
 
-```
-func counter() func() int {
-    count := 0
-    return func() int {
-        count++
-        return count
-    }
-}
+	```
+	func counter() func() int {
+	    count := 0
+	    return func() int {
+		count++
+		return count
+	    }
+	}
 
-func main() {
-    c := counter()
-    fmt.Println(c())  // prints 1
-    fmt.Println(c())  // prints 2
-    fmt.Println(c())  // prints 3
-}
+	func main() {
+	    c := counter()
+	    fmt.Println(c())  // prints 1
+	    fmt.Println(c())  // prints 2
+	    fmt.Println(c())  // prints 3
+	}
 
-```
+	```
+	
 	In this example, the counter function returns a closure that takes no parameters and returns an int. The closure captures a variable called count, which is initialized to 0 when counter is called. Each time the closure is called, it increments the value of count and returns it.
 
 	Overall, closures in Go provide a powerful and flexible way to write higher-order functions and to create functions with persistent state. By capturing variables from their enclosing scopes, closures make it possible to write more expressive and concise code in a wide range of situations.
 
 
-19. What is a pointer in Go, and how are they used?
+14. What is a pointer in Go, and how are they used?
 
 	In Go, a pointer is a variable that stores the memory address of another variable. Pointers are used to pass values by reference, allowing functions to modify the original values instead of just receiving a copy.
 
@@ -454,6 +466,7 @@ In Go, a pointer is represented by the * operator, which is used to declare a po
 	}
 
 	```
+	
 	In this example, we declare an integer variable x and a pointer variable ptr that points to the memory address of x. We use the & operator to get the address of x and assign it to ptr. We can then access the value of x indirectly using the * operator applied to ptr.
 
 	We can also modify the value of x indirectly by assigning a new value to the memory address pointed to by ptr. When we modify *ptr, we are modifying the value of x itself.
@@ -462,47 +475,47 @@ In Go, a pointer is represented by the * operator, which is used to declare a po
 
 	However, pointers can also be a source of bugs and vulnerabilities, since incorrect use of pointers can cause memory leaks, data corruption, and security issues. To avoid these problems, it's important to follow best practices when working with pointers in Go, such as using nil pointers to indicate uninitialized or invalid values, avoiding pointer arithmetic and casting, and using the new and make functions to allocate memory safely.
 
-21. What is the difference between a slice and an array in Go?
-22. How do you handle dependencies in Go, and what are some tools that you can use for dependency management?
-23. What are some common concurrency patterns in Go, and how are they used?
-24. How to compare two slices in golang?
-25. How to compare two structs in golang?
-26. How to compare two maps in golang?
-27. What is the difference between parallelism and concurrency?
-28. What is statically typed languages?
-29. What is dynamically typed languages?
-30. What is race condition?
-31. What is defer in golang?
-32. What is panic in golang?
-33. What is the use of recover in golang?
-34. Type assertion in golang?
-35. what is rune in golang?
-36. what is pointer in golang?
-37. Object oriented principles in golang?
-38. Compiled programming vs Interpreted programming
-39. Question 1: Compare the two variables in golang . 
+15. What is the difference between a slice and an array in Go?
+16. How do you handle dependencies in Go, and what are some tools that you can use for dependency management?
+17. What are some common concurrency patterns in Go, and how are they used?
+18. How to compare two slices in golang?
+19. How to compare two structs in golang?
+20. How to compare two maps in golang?
+21. What is the difference between parallelism and concurrency?
+22. What is statically typed languages?
+23. What is dynamically typed languages?
+24. What is race condition?
+25. What is defer in golang?
+26. What is panic in golang?
+27. What is the use of recover in golang?
+28. Type assertion in golang?
+29. what is rune in golang?
+30. what is pointer in golang?
+31. Object oriented principles in golang?
+32. Compiled programming vs Interpreted programming
+33. Question 1: Compare the two variables in golang . 
 	a = 10
 	b = 10
-37. Compare these two maps 
+34. Compare these two maps 
 	a = []int{1}
 	b = []int{1}
-38. Compare two maps
+35. Compare two maps
 	a = map[string]string{"A": "B"}
 	b = map[string]string{"A": "B"}
-39. Output of the following:
+36. Output of the following:
 a := []int{5, 7}
 b := []int{6, 6}
 check := a
 copy(a, b)
 fmt.Println(a, b, check)
 
-40. a := []int{5, 7}
+37. a := []int{5, 7}
 b := []int{6, 8}
 check := a
 a = b
 fmt.Println(a, b, check)
 
-41. Question: Arrange the key in sorted order:
+38. Question: Arrange the key in sorted order:
 	fruits := map[string]int{
 		"oranges": 100,
 		"apples":  200,
@@ -543,7 +556,7 @@ func main() {
 
 ```
 
-42. Question: 
+39. Question: 
 Implement WordCount. It should return a map of the counts of each “word” in the string s. 
  
 Bonus: The wc. Test function runs a test suite against the provided function and prints success or failure.
@@ -563,22 +576,22 @@ PASS
   map[string]int{"A":1, "a":2, "canal":1, "man":1, "panama.":1, "plan":1}
   
   
-43. Type conversion from string to integers
+40. Type conversion from string to integers
 
 
-44. Create a pointer and store and type convert it
+41. Create a pointer and store and type convert it
 
 
-45. How to run different applications in same port 
+42. How to run different applications in same port 
 
 
-46. How to optimize data base queries
+43. How to optimize data base queries
 
 
-47. How to copy postgres table 
+44. How to copy postgres table 
 
 
-48. How to write unit tests in golang
+45. How to write unit tests in golang
 
 
 
