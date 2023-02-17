@@ -387,6 +387,8 @@ func main() {
 
 	```
 	
+	
+	
 		When myFunction() is called with go, a new goroutine is created and myFunction() is executed in that goroutine concurrently with the main goroutine. The two goroutines can execute simultaneously and communicate with each other using channels or other synchronization mechanisms.
 
 	One of the key differences between goroutines and threads is their memory usage. In most operating systems, threads require a relatively large amount of memory to maintain their execution context, which includes the stack, register values, and other information. In contrast, goroutines in Go are implemented as small, fixed-size stacks (typically a few kilobytes), and their execution contexts are stored on the heap, making them much more memory-efficient.
