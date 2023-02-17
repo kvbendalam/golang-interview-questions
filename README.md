@@ -22,7 +22,23 @@ func main() {
 }
 ```
 2. Write a program that takes a string as input and prints the number of words in the string.
+```
+package main
 
+import "fmt"
+
+func main() {
+	str := "The quick brown fox jumps over the lazy dog"
+	numWords := 1
+	for _, char := range str {
+		if char == ' ' {
+			numWords++
+		}
+	}
+	fmt.Printf("The number of words in the string is: %d\n", numWords)
+}
+
+```
 3. Write a program that takes a slice of integers and sorts them in ascending order.
 
 4. Write a program that takes a slice of strings and removes all duplicates.
