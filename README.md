@@ -552,7 +552,7 @@ func main() {
 
 24. What is dynamically typed languages?
 		
-		A dynamically typed language is a programming language where variables are not bound to a specific data type at compile time, but instead, the type of a variable is determined at runtime based on the value it is assigned. The type of a variable does not need to be declared explicitly, and it can change dynamically during the execution of the program.
+	A dynamically typed language is a programming language where variables are not bound to a specific data type at compile time, but instead, the type of a variable is determined at runtime based on the value it is assigned. The type of a variable does not need to be declared explicitly, and it can change dynamically during the execution of the program.
 
 	In dynamically typed languages, the interpreter or runtime system infers the data type of a variable based on its current value and how it is being used in the program. This approach allows for more flexibility and faster development times since the programmer can change the type of a variable on the fly, without having to worry about type declarations or compiler errors.
 
@@ -589,7 +589,7 @@ func main() {
 	
 29. What is panic in golang?
 
-		In Go, panic is a built-in function that is used to cause a program to immediately stop execution and start a panic, which is an unrecoverable error that can crash the program. When a panic occurs, the program will unwind the stack, meaning that it will stop executing the current function and continue to unwind the call stack until it reaches a deferred function or the top of the stack.
+	In Go, panic is a built-in function that is used to cause a program to immediately stop execution and start a panic, which is an unrecoverable error that can crash the program. When a panic occurs, the program will unwind the stack, meaning that it will stop executing the current function and continue to unwind the call stack until it reaches a deferred function or the top of the stack.
 
 	Panics are often used to indicate that a program has encountered an unrecoverable error condition, such as an out-of-memory condition, a division by zero, or an attempt to access an invalid memory address. When a panic occurs, the program will terminate and print a stack trace that shows the sequence of function calls that led to the panic, along with the file names and line numbers of the offending code.
 
@@ -610,7 +610,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 	
 31. What is the use of recover in golang?
 		
-		In Go, recover is a built-in function that is used to recover from a panic and resume normal execution. When a panic occurs, the program will unwind the stack and call any deferred functions, but if a deferred function calls recover, the panic will be stopped and the program will continue executing normally.
+	In Go, recover is a built-in function that is used to recover from a panic and resume normal execution. When a panic occurs, the program will unwind the stack and call any deferred functions, but if a deferred function calls recover, the panic will be stopped and the program will continue executing normally.
 
 	The recover function can only be called from within a deferred function, and it returns the value that was passed to the panic function, allowing the program to examine the error and take appropriate action. If the recover function is called from a non-deferred function, or if it is called when there is no active panic, it will return nil.
 
