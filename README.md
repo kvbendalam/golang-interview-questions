@@ -803,13 +803,17 @@ It is important to note that panics are only used for unrecoverable errors, and 
 	fmt.Println(a, b, check)
 
 35. Arrange the key in sorted order:
+
+
+	```
 	fruits := map[string]int{
 		"oranges": 100,
 		"apples":  200,
 		"bananas": 300,
 	}
-```
+	```
 
+	```
 	package main
 
 	import (
@@ -840,6 +844,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 			fmt.Println(key, values[key])
 		}
 	}
+	
 	```
  
 36. Type conversion from string to integers
