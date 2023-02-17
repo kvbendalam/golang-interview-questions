@@ -523,19 +523,60 @@ func main() {
 19. How to compare two slices in golang?
 20. How to compare two structs in golang?
 21. How to compare two maps in golang?
+
 22. What is the difference between parallelism and concurrency?
+	
+	Parallelism and concurrency are related but distinct concepts in computer science.
+
+	Concurrency refers to the ability of a system to handle multiple tasks or processes at the same time, regardless of whether those tasks are actually executing at the same time. In a concurrent system, tasks may be executed in parallel, but they may also be executed in an interleaved or overlapping fashion, depending on the specific scheduling algorithm used by the system. A good real-world example of concurrency is a web server, which handles many requests from clients at the same time, but does not necessarily process all of those requests in parallel.
+
+	Parallelism, on the other hand, refers specifically to the ability of a system to execute multiple tasks or processes simultaneously, using multiple processing units. In a parallel system, tasks are executed in parallel, with each task running on a separate processing unit. A good real-world example of parallelism is a high-performance computing cluster, which uses multiple processors or nodes to execute a single large computational task in parallel.
+
+	To summarize, concurrency is about managing multiple tasks or processes, while parallelism is about executing those tasks in parallel on separate processing units. In many cases, concurrency can be achieved without parallelism, but parallelism always requires some degree of concurrency.
+
+	Here are some additional real-world examples of concurrency and parallelism:
+
+	A spreadsheet program that recalculates formulas in real-time while the user is editing the data is an example of concurrency. The program is able to handle multiple input events (such as mouse clicks and keystrokes) concurrently, but it does not necessarily execute those events in parallel.
+	
+	A video game that uses a separate thread to load assets (such as textures and models) in the background while the main game loop runs is an example of concurrency. The game is able to handle both gameplay logic and asset loading concurrently, but it does not necessarily execute those tasks in parallel.
+	
+	A machine learning algorithm that distributes training data across multiple processors or nodes to speed up the training process is an example of parallelism. The algorithm is able to execute multiple training iterations in parallel, with each iteration running on a separate processing unit.
+
 23. What is statically typed languages?
+	
+	A statically typed language is a programming language where variables are bound to a specific data type at compile time, and this data type cannot be changed during the execution of the program. The type of a variable must be declared explicitly, and the compiler checks whether the types of variables are consistent and compatible with each other.
+
+	In statically typed languages, the data types are usually defined by the language specification, and the compiler uses this information to generate efficient machine code that can run the program. This approach provides better performance and helps catch type-related errors at compile time, before the program is run, which can help prevent certain types of bugs.
+
+	Some examples of statically typed languages include Java, C++, C#, Swift, and Go. These languages are often used for large, complex software projects that require high performance and reliability, such as operating systems, databases, and web applications. However, the rigid type checking can also make statically typed languages less flexible and harder to work with for rapid prototyping and experimentation.
+
 24. What is dynamically typed languages?
+		A dynamically typed language is a programming language where variables are not bound to a specific data type at compile time, but instead, the type of a variable is determined at runtime based on the value it is assigned. The type of a variable does not need to be declared explicitly, and it can change dynamically during the execution of the program.
+
+	In dynamically typed languages, the interpreter or runtime system infers the data type of a variable based on its current value and how it is being used in the program. This approach allows for more flexibility and faster development times since the programmer can change the type of a variable on the fly, without having to worry about type declarations or compiler errors.
+
+	Some examples of dynamically typed languages include Python, JavaScript, Ruby, and PHP. These languages are often used for rapid prototyping, scripting, and web development, where speed of development and flexibility are often more important than performance.
+
+	However, dynamic typing can also make the code harder to debug and maintain, as errors related to data types can go undetected until runtime, and the lack of type checking can make it harder to understand how variables are being used in the code.
+
 25. What is race condition?
-26. What is defer in golang?
-27. What is panic in golang?
-28. What is the use of recover in golang?
-29. Type assertion in golang?
-30. what is rune in golang?
-31. what is pointer in golang?
-32. Object oriented principles in golang?
-33. Compiled programming vs Interpreted programming
-34. Question 1: Compare the two variables in golang . 
+	A race condition is a situation that occurs in computer programs when two or more threads or processes access a shared resource or data at the same time, and the final outcome of the program depends on the order in which these access occur. The result of the program may be dependent on the timing of the events, and can be unpredictable and non-deterministic.
+
+	Race conditions can occur when multiple threads or processes are trying to modify a shared variable, file, or other resource without proper synchronization. When two threads or processes try to modify the same variable or resource at the same time, the final outcome can be different depending on which thread or process executes first. This can result in unexpected program behavior, crashes, or data corruption.
+
+	Race conditions are often difficult to reproduce and debug, as they can be influenced by a number of factors, such as the speed of the computer, the number of threads or processes involved, and the exact timing of the events. To avoid race conditions, programs must use proper synchronization techniques, such as locks, semaphores, or other mechanisms that ensure that only one thread or process can access a shared resource at a time.
+	
+27. What is defer in golang?
+	
+
+29. What is panic in golang?
+30. What is the use of recover in golang?
+31. Type assertion in golang?
+32. what is rune in golang?
+33. what is pointer in golang?
+34. Object oriented principles in golang?
+35. Compiled programming vs Interpreted programming
+36. Question 1: Compare the two variables in golang . 
 	a = 10
 	b = 10
 34. Compare these two maps 
