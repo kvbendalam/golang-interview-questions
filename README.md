@@ -312,6 +312,7 @@ func main() {
 	Channels in Go provide a safe and efficient way to coordinate the execution of concurrent goroutines and communicate between them, making it easier to write scalable and efficient concurrent programs.
 
 14. How do you handle errors in Go, and what are some best practices for error handling?
+
 	In Go, errors are represented using the built-in error interface, which is defined as follows:
 
 	```
@@ -357,7 +358,9 @@ func (e MyError) Error() string {
     return e.Msg
 }
 ```
+
 	In summary, error handling in Go involves checking for errors explicitly, wrapping errors with additional context, returning errors as values, and avoiding the use of errors as control flow. By following these best practices, you can write more robust and maintainable Go code.
+	
 15. What is a goroutine in Go, and how does it differ from a thread?
 16. Can you explain what closures are in Go, and how they work?
 17. What is a pointer in Go, and how are they used?
