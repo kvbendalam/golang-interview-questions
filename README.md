@@ -723,15 +723,16 @@ It is important to note that panics are only used for unrecoverable errors, and 
 	a = 10
 	b = 10
 	
-	
-	
-34. Compare these two maps 
-	a = []int{1}
-	b = []int{1}
-	
 	```
 	fmt.Println(a==b)
 	```
+	
+	
+34. Compare two slices
+	a = []int{2,4,5,6}
+	b = []int{2,4,5,6}
+	
+	
 	
 	
 35. Compare two maps
@@ -749,7 +750,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 	
 	
 
-37.What is the out for the following: 
+37.What is the output for the following: 
 	a := []int{5, 7}
 	b := []int{6, 8}
 	check := a
