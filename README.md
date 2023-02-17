@@ -349,16 +349,16 @@ func main() {
 	Don't use errors as control flow: Avoid using errors as a mechanism for control flow in your code, such as using a specific error to indicate a certain condition. This can make your code harder to read and maintain.
 
 	Use typed errors: Consider using typed errors instead of string errors to provide more information about the error. You can define your own error types by implementing the error interface:
-```
-type MyError struct {
-    Msg string
-}
+	```
+	type MyError struct {
+	    Msg string
+	}
 
-func (e MyError) Error() string {
-    return e.Msg
-}
-```
-
+	func (e MyError) Error() string {
+	    return e.Msg
+	}
+	```
+	
 	In summary, error handling in Go involves checking for errors explicitly, wrapping errors with additional context, returning errors as values, and avoiding the use of errors as control flow. By following these best practices, you can write more robust and maintainable Go code.
 	
 15. What is a goroutine in Go, and how does it differ from a thread?
