@@ -613,7 +613,7 @@ func main() {
 
 	Race conditions are often difficult to reproduce and debug, as they can be influenced by a number of factors, such as the speed of the computer, the number of threads or processes involved, and the exact timing of the events. To avoid race conditions, programs must use proper synchronization techniques, such as locks, semaphores, or other mechanisms that ensure that only one thread or process can access a shared resource at a time.
 	
-27. What is defer in golang?
+26. What is defer in golang?
 	
 	In Go, defer is a statement that is used to schedule a function call to be executed at the end of the current function or block, just before it returns. The defer statement is often used to release resources, such as closing a file, unlocking a mutex, or closing a network connection, to ensure that they are properly cleaned up when the function or block exits, regardless of the reason for the exit, such as a normal return, a panic, or a runtime error.
 
@@ -632,7 +632,7 @@ func main() {
 
 	Defer statements are commonly used in Go to ensure that resources are properly cleaned up, even in the presence of errors or panics, which can help make Go programs more robust and reliable.
 	
-29. What is panic in golang?
+27. What is panic in golang?
 
 	In Go, panic is a built-in function that is used to cause a program to immediately stop execution and start a panic, which is an unrecoverable error that can crash the program. When a panic occurs, the program will unwind the stack, meaning that it will stop executing the current function and continue to unwind the call stack until it reaches a deferred function or the top of the stack.
 
@@ -653,7 +653,7 @@ func main() {
 
 It is important to note that panics are only used for unrecoverable errors, and should not be used for normal error handling. Go has a separate error handling mechanism, based on returning errors as values, which is preferred for normal error conditions.
 	
-31. What is the use of recover in golang?
+28. What is the use of recover in golang?
 		
 	In Go, recover is a built-in function that is used to recover from a panic and resume normal execution. When a panic occurs, the program will unwind the stack and call any deferred functions, but if a deferred function calls recover, the panic will be stopped and the program will continue executing normally.
 
@@ -677,7 +677,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 
 	The recover function is often used in conjunction with defer to handle panics and allow programs to gracefully recover from errors, especially in long-running programs such as servers or daemons. However, it is important to note that recover should only be used for handling unexpected panics, and should not be used for normal error handling. The preferred way to handle normal errors in Go is by returning error values as part of the function's return signature.
 
-33. Type assertion in golang?
+29. Type assertion in golang?
 
 	In Go, type assertion is a way to check whether an interface value holds a specific underlying concrete type, and to extract the value of that type. It is often used to perform a runtime type check of an interface value, and to access its underlying concrete value if it matches the desired type.
 
@@ -713,7 +713,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 
 	When the printInt function is called with an int value, the type assertion succeeds and the function prints "x is an int: 42". When the function is called with a string value, the type assertion fails and the function prints "x is not an int".
 
-35. what is rune in golang?
+30. what is rune in golang?
 
 	In Go, a rune is an alias for the int32 type, and represents a Unicode code point. A Unicode code point is a numerical value that uniquely identifies a character in the Unicode standard.
 	
@@ -737,7 +737,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 	
 	In general, rune is used in Go to represent Unicode characters, and provides a convenient way to work with Unicode strings and characters.
 	
-37. Object oriented principles in golang?
+31. Object oriented principles in golang?
 
 	Go is not a pure object-oriented programming language like Java or C++, but it supports some of the core principles of object-oriented programming, such as encapsulation, abstraction, and composition.
 
@@ -750,7 +750,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 	In summary, while Go is not a pure object-oriented language, it provides several features that support the core principles of encapsulation, abstraction, and composition. By using these features effectively, you can write code that is modular, flexible, and maintainable.
 	
 	
-39. Compiled programming vs Interpreted programming
+32. Compiled programming vs Interpreted programming
 	
 	Compiled programming and interpreted programming are two different ways of executing computer programs.
 
@@ -764,7 +764,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 
 	In summary, compiled programming and interpreted programming are two different ways of executing computer programs, each with their own advantages and disadvantages. The choice of programming approach depends on the specific requirements of the program and the target system on which it will be executed.
 	
-41. Compare the two variables in golang . 
+33. Compare the two variables in golang . 
 	a = 10
 	b = 10
 	
@@ -795,7 +795,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 	
 	
 
-37.What is the output for the following: 
+37. What is the output for the following: 
 	a := []int{5, 7}
 	b := []int{6, 8}
 	check := a
@@ -810,71 +810,71 @@ It is important to note that panics are only used for unrecoverable errors, and 
 	}
 ```
 
-package main
+	package main
 
-import (
-	"fmt"
-	"sort"
-)
+	import (
+		"fmt"
+		"sort"
+	)
 
 
-func main() {
-	values := map[string]int{
-		"cherry": 30,
-		"apple":  10,
-		"banana": 20,
+	func main() {
+		values := map[string]int{
+			"cherry": 30,
+			"apple":  10,
+			"banana": 20,
+		}
+
+
+		keys := make([]string, 0, len(values))
+		for key := range values {
+			keys = append(keys, key)
+		}
+
+
+		sort.Strings(keys)
+		fmt.Println(keys)
+
+
+		for _, key := range keys {
+			fmt.Println(key, values[key])
+		}
 	}
 
-
-	keys := make([]string, 0, len(values))
-	for key := range values {
-		keys = append(keys, key)
-	}
-
-
-	sort.Strings(keys)
-	fmt.Println(keys)
-
-
-	for _, key := range keys {
-		fmt.Println(key, values[key])
-	}
-}
-
-```
+	```
 
 39. Question: 
 Implement WordCount. It should return a map of the counts of each “word” in the string s. 
  
 Bonus: The wc. Test function runs a test suite against the provided function and prints success or failure.
 
-
-PASS
- f("I am learning Go!") = 
-  map[string]int{"Go!":1, "I":1, "am":1, "learning":1}
-PASS
- f("The quick brown fox jumped over the lazy dog.") = 
-  map[string]int{"The":1, "brown":1, "dog.":1, "fox":1, "jumped":1, "lazy":1, "over":1, "quick":1, "the":1}
-PASS
- f("I ate a donut. Then I ate another donut.") = 
-  map[string]int{"I":2, "Then":1, "a":1, "another":1, "ate":2, "donut.":2}
-PASS
- f("A man a plan a canal panama.") = 
-  map[string]int{"A":1, "a":2, "canal":1, "man":1, "panama.":1, "plan":1}
-  
+	```
+	PASS
+	 f("I am learning Go!") = 
+	  map[string]int{"Go!":1, "I":1, "am":1, "learning":1}
+	PASS
+	 f("The quick brown fox jumped over the lazy dog.") = 
+	  map[string]int{"The":1, "brown":1, "dog.":1, "fox":1, "jumped":1, "lazy":1, "over":1, "quick":1, "the":1}
+	PASS
+	 f("I ate a donut. Then I ate another donut.") = 
+	  map[string]int{"I":2, "Then":1, "a":1, "another":1, "ate":2, "donut.":2}
+	PASS
+	 f("A man a plan a canal panama.") = 
+	  map[string]int{"A":1, "a":2, "canal":1, "man":1, "panama.":1, "plan":1}
+	  ```
   
 40. Type conversion from string to integers
 
-42. How to run different applications in same port 
+41. How to run different applications in same port 
 
 
-43. How to optimize data base queries
+42. How to optimize data base queries
 
 
-44. How to copy postgres table 
+43. How to copy postgres table 
 
 
-45. How to write unit tests in golang
+44. How to write unit tests in golang
 
 
 
