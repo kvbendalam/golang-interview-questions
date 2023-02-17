@@ -560,6 +560,7 @@ func main() {
 	However, dynamic typing can also make the code harder to debug and maintain, as errors related to data types can go undetected until runtime, and the lack of type checking can make it harder to understand how variables are being used in the code.
 
 25. What is race condition?
+	
 	A race condition is a situation that occurs in computer programs when two or more threads or processes access a shared resource or data at the same time, and the final outcome of the program depends on the order in which these access occur. The result of the program may be dependent on the timing of the events, and can be unpredictable and non-deterministic.
 
 	Race conditions can occur when multiple threads or processes are trying to modify a shared variable, file, or other resource without proper synchronization. When two threads or processes try to modify the same variable or resource at the same time, the final outcome can be different depending on which thread or process executes first. This can result in unexpected program behavior, crashes, or data corruption.
@@ -568,45 +569,200 @@ func main() {
 	
 27. What is defer in golang?
 	
+	In Go, defer is a statement that is used to schedule a function call to be executed at the end of the current function or block, just before it returns. The defer statement is often used to release resources, such as closing a file, unlocking a mutex, or closing a network connection, to ensure that they are properly cleaned up when the function or block exits, regardless of the reason for the exit, such as a normal return, a panic, or a runtime error.
 
+	When a defer statement is executed, the arguments to the function are evaluated immediately, but the actual function call is delayed until the end of the enclosing function or block. This means that the deferred function call will be executed in reverse order of their appearance in the code, meaning the last deferred function call will be executed first and the first deferred function call will be executed last.
+
+	Here is an example that demonstrates the use of defer:
+
+	```
+	func foo() {
+	    defer fmt.Println("deferred call")
+	    fmt.Println("normal call")
+	}
+	```
+	
+	In this example, the foo function prints "normal call" and schedules a deferred function call to print "deferred call". When the foo function returns, the deferred function call is executed, and "deferred call" is printed.
+
+	Defer statements are commonly used in Go to ensure that resources are properly cleaned up, even in the presence of errors or panics, which can help make Go programs more robust and reliable.
+	
 29. What is panic in golang?
-30. What is the use of recover in golang?
-31. Type assertion in golang?
-32. what is rune in golang?
-33. what is pointer in golang?
-34. Object oriented principles in golang?
-35. Compiled programming vs Interpreted programming
-36. Question 1: Compare the two variables in golang . 
+
+		In Go, panic is a built-in function that is used to cause a program to immediately stop execution and start a panic, which is an unrecoverable error that can crash the program. When a panic occurs, the program will unwind the stack, meaning that it will stop executing the current function and continue to unwind the call stack until it reaches a deferred function or the top of the stack.
+
+	Panics are often used to indicate that a program has encountered an unrecoverable error condition, such as an out-of-memory condition, a division by zero, or an attempt to access an invalid memory address. When a panic occurs, the program will terminate and print a stack trace that shows the sequence of function calls that led to the panic, along with the file names and line numbers of the offending code.
+
+	Here is an example of using panic:
+	
+	```
+	func divide(a, b int) int {
+	    if b == 0 {
+		panic("division by zero")
+	    }
+	    return a / b
+	}
+	```
+	
+	In this example, the divide function checks if the second argument is zero and panics if it is, using a string message to indicate the error. If the divide function is called with a zero second argument, it will cause a panic and stop the program.
+
+It is important to note that panics are only used for unrecoverable errors, and should not be used for normal error handling. Go has a separate error handling mechanism, based on returning errors as values, which is preferred for normal error conditions.
+	
+31. What is the use of recover in golang?
+		
+		In Go, recover is a built-in function that is used to recover from a panic and resume normal execution. When a panic occurs, the program will unwind the stack and call any deferred functions, but if a deferred function calls recover, the panic will be stopped and the program will continue executing normally.
+
+	The recover function can only be called from within a deferred function, and it returns the value that was passed to the panic function, allowing the program to examine the error and take appropriate action. If the recover function is called from a non-deferred function, or if it is called when there is no active panic, it will return nil.
+
+	Here is an example that demonstrates the use of recover:
+	
+	```
+	func foo() {
+	    defer func() {
+		if r := recover(); r != nil {
+		    fmt.Println("recovered from panic:", r)
+		}
+	    }()
+	    panic("test panic")
+	}
+	```
+	
+	In this example, the foo function panics with a string message, but the deferred function uses recover to catch the panic and print a message. When the foo function is called, it will panic and print the message, but the program will not terminate and will resume normal execution after the deferred function completes.
+
+	The recover function is often used in conjunction with defer to handle panics and allow programs to gracefully recover from errors, especially in long-running programs such as servers or daemons. However, it is important to note that recover should only be used for handling unexpected panics, and should not be used for normal error handling. The preferred way to handle normal errors in Go is by returning error values as part of the function's return signature.
+
+33. Type assertion in golang?
+
+	In Go, type assertion is a way to check whether an interface value holds a specific underlying concrete type, and to extract the value of that type. It is often used to perform a runtime type check of an interface value, and to access its underlying concrete value if it matches the desired type.
+
+	The syntax for type assertion in Go is as follows:
+	
+	```
+	x, ok := y.(T)
+	```
+	
+	where y is an interface value, T is a concrete type, and x is a variable of type T. The second return value, ok, is a boolean that indicates whether the type assertion succeeded or failed.
+
+	If the type assertion succeeds, x will be set to the underlying concrete value of type T held by the interface value y, and ok will be set to true. If the type assertion fails, x will be set to the zero value of type T (i.e., nil for pointers, 0 for numeric types, false for bools, and so on), and ok will be set to false.
+
+	Here is an example that demonstrates the use of type assertion in Go:
+
+	```
+	func printInt(x interface{}) {
+	    if n, ok := x.(int); ok {
+		fmt.Println("x is an int:", n)
+	    } else {
+		fmt.Println("x is not an int")
+	    }
+	}
+
+	func main() {
+	    printInt(42)
+	    printInt("hello")
+	}
+
+	```
+	
+	In this example, the printInt function takes an interface value x, and uses a type assertion to check whether it holds an int value. If the type assertion succeeds, it prints a message indicating that x is an int, along with its value. If the type assertion fails, it prints a message indicating that x is not an int.
+
+	When the printInt function is called with an int value, the type assertion succeeds and the function prints "x is an int: 42". When the function is called with a string value, the type assertion fails and the function prints "x is not an int".
+
+35. what is rune in golang?
+
+	In Go, a rune is an alias for the int32 type, and represents a Unicode code point. A Unicode code point is a numerical value that uniquely identifies a character in the Unicode standard.
+	
+	Because Go uses Unicode to represent strings, rune is often used to represent individual characters in a string. For example, you can use the range keyword with a string to iterate over its individual runes:
+	
+	```
+	s := "hello, 世界"
+	for _, r := range s {
+	    fmt.Printf("%c", r)
+	}
+	```
+	
+	In this example, the range statement iterates over the string s and extracts each individual rune. The %c format verb is used to print the character represented by each rune.
+
+	rune is a built-in type in Go, and can be used wherever an int32 value is expected. For example, you can declare a slice of runes like this:
+	
+	
+	```
+	var r []rune = []rune{'h', 'e', 'l', 'l', 'o', ',', ' ', '世', '界'}
+	```
+	
+	In general, rune is used in Go to represent Unicode characters, and provides a convenient way to work with Unicode strings and characters.
+	
+37. Object oriented principles in golang?
+
+	Go is not a pure object-oriented programming language like Java or C++, but it supports some of the core principles of object-oriented programming, such as encapsulation, abstraction, and composition.
+
+	One of the key mechanisms for achieving encapsulation in Go is the use of exported and unexported identifiers. By convention, any identifier that begins with a capital letter is exported from its package and can be accessed by other packages, while any identifier that begins with a lowercase letter is unexported and can only be accessed within its own package. This allows you to control the visibility and access of data and functions in your code.
+
+	Go also supports abstraction through the use of interfaces. An interface is a set of method signatures that define a contract for a specific behavior, without specifying how that behavior is implemented. This allows you to write code that is decoupled from specific implementations, and can be used with any type that satisfies the interface. By convention, Go interfaces are named with a single method, followed by the "-er" suffix, such as io.Reader or http.Handler.
+
+	Composition is another important principle of object-oriented programming that Go supports through the use of struct embedding. Struct embedding allows you to create new types by embedding one or more existing types as fields, and then accessing their methods and fields directly. This can be used to create more complex data structures and behaviors by combining smaller, more focused types.
+
+	In summary, while Go is not a pure object-oriented language, it provides several features that support the core principles of encapsulation, abstraction, and composition. By using these features effectively, you can write code that is modular, flexible, and maintainable.
+	
+	
+39. Compiled programming vs Interpreted programming
+	
+	Compiled programming and interpreted programming are two different ways of executing computer programs.
+
+	In compiled programming, the source code of a program is translated into machine code by a compiler before the program is executed. The resulting machine code is specific to the hardware and operating system on which it is compiled, and can be directly executed by the computer without the need for any further translation or interpretation. Examples of compiled programming languages include C, C++, and Rust.
+
+	In interpreted programming, the source code of a program is interpreted by an interpreter at runtime. The interpreter reads and executes the source code line by line, translating each line into machine code on the fly. Because the interpreter is translating the code at runtime, the resulting machine code can be specific to the hardware and operating system on which the program is executed. Examples of interpreted programming languages include Python, Ruby, and JavaScript.
+
+	One advantage of compiled programming is that the resulting machine code can be highly optimized for the specific hardware and operating system on which it is compiled, leading to faster execution times. Compiled programs are also typically easier to distribute, since they do not require a compiler or interpreter to be installed on the target system.
+
+	One advantage of interpreted programming is that it can be more flexible and easier to debug, since the interpreter can execute the source code directly and provide error messages and debugging information in real time. Interpreted programs are also typically more portable, since they can be executed on any system with an interpreter for the specific programming language.
+
+	In summary, compiled programming and interpreted programming are two different ways of executing computer programs, each with their own advantages and disadvantages. The choice of programming approach depends on the specific requirements of the program and the target system on which it will be executed.
+	
+41. Compare the two variables in golang . 
 	a = 10
 	b = 10
+	
+	
+	
 34. Compare these two maps 
 	a = []int{1}
 	b = []int{1}
+	
+	```
+	fmt.Println(a==b)
+	```
+	
+	
 35. Compare two maps
 	a = map[string]string{"A": "B"}
 	b = map[string]string{"A": "B"}
+	
+	
+	
 36. Output of the following:
-a := []int{5, 7}
-b := []int{6, 6}
-check := a
-copy(a, b)
-fmt.Println(a, b, check)
+	a := []int{5, 7}
+	b := []int{6, 6}
+	check := a
+	copy(a, b)
+	fmt.Println(a, b, check)
+	
+	
 
-37. a := []int{5, 7}
-b := []int{6, 8}
-check := a
-a = b
-fmt.Println(a, b, check)
+37.What is the out for the following: 
+	a := []int{5, 7}
+	b := []int{6, 8}
+	check := a
+	a = b
+	fmt.Println(a, b, check)
 
-38. Question: Arrange the key in sorted order:
+38. Arrange the key in sorted order:
 	fruits := map[string]int{
 		"oranges": 100,
 		"apples":  200,
 		"bananas": 300,
 	}
 ```
-package main
 
+package main
 
 import (
 	"fmt"
@@ -660,10 +816,6 @@ PASS
   
   
 40. Type conversion from string to integers
-
-
-41. Create a pointer and store and type convert it
-
 
 42. How to run different applications in same port 
 
