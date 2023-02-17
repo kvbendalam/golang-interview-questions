@@ -421,7 +421,7 @@ func main() {
 	
 	In this example, the adder function returns a closure that takes an int parameter and returns an int. The closure captures a variable called sum, which is initialized to 0 when adder is called. Each time the closure is called, it adds the input parameter to sum and returns the new value of sum.
 
-Closures in Go are often used for creating functions that generate other functions or for implementing functions with persistent state. For example, you could use a closure to implement a counter that remembers its state between calls:
+	Closures in Go are often used for creating functions that generate other functions or for implementing functions with persistent state. For example, you could use a closure to implement a counter that remembers its state between calls:
 
 	```
 	func counter() func() int {
@@ -441,6 +441,7 @@ Closures in Go are often used for creating functions that generate other functio
 
 	```
 	
+	
 	In this example, the counter function returns a closure that takes no parameters and returns an int. The closure captures a variable called count, which is initialized to 0 when counter is called. Each time the closure is called, it increments the value of count and returns it.
 
 	Overall, closures in Go provide a powerful and flexible way to write higher-order functions and to create functions with persistent state. By capturing variables from their enclosing scopes, closures make it possible to write more expressive and concise code in a wide range of situations.
@@ -450,7 +451,8 @@ Closures in Go are often used for creating functions that generate other functio
 
 	In Go, a pointer is a variable that stores the memory address of another variable. Pointers are used to pass values by reference, allowing functions to modify the original values instead of just receiving a copy.
 
-In Go, a pointer is represented by the * operator, which is used to declare a pointer type or to access the value of a pointer. Here's an example of how to declare and use a pointer in Go:
+	In Go, a pointer is represented by the * operator, which is used to declare a pointer type or to access the value of a pointer. Here's an example of how to declare and use a pointer in Go:
+	
 
 	```
 	func main() {
@@ -466,6 +468,7 @@ In Go, a pointer is represented by the * operator, which is used to declare a po
 	}
 
 	```
+	
 	
 	In this example, we declare an integer variable x and a pointer variable ptr that points to the memory address of x. We use the & operator to get the address of x and assign it to ptr. We can then access the value of x indirectly using the * operator applied to ptr.
 
