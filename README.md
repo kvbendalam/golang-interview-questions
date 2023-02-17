@@ -39,7 +39,35 @@ func main() {
 }
 
 ```
-3. Write a program that takes a slice of integers and sorts them in ascending order.
+3. Write a program that takes a string as a input and print in its reverse order
+```
+package main
+
+import (
+    "fmt"
+    "strings"
+)
+
+func reverseWords(s string) string {
+    // Split the string into a slice of words
+    words := strings.Fields(s)
+    
+    // Reverse the order of the words in the slice
+    for i, j := 0, len(words)-1; i < j; i, j = i+1, j-1 {
+        words[i], words[j] = words[j], words[i]
+    }
+    
+    // Join the words back together into a string
+    return strings.Join(words, " ")
+}
+
+func main() {
+    str := "The quick brown fox jumps over the lazy dog"
+    reversed := reverseWords(str)
+    fmt.Println(reversed)
+}
+```
+4. Write a program that takes a slice of integers and sorts them in ascending order.
 
 4. Write a program that takes a slice of strings and removes all duplicates.
 
