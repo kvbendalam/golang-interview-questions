@@ -551,6 +551,7 @@ func main() {
 	Some examples of statically typed languages include Java, C++, C#, Swift, and Go. These languages are often used for large, complex software projects that require high performance and reliability, such as operating systems, databases, and web applications. However, the rigid type checking can also make statically typed languages less flexible and harder to work with for rapid prototyping and experimentation.
 
 24. What is dynamically typed languages?
+		
 		A dynamically typed language is a programming language where variables are not bound to a specific data type at compile time, but instead, the type of a variable is determined at runtime based on the value it is assigned. The type of a variable does not need to be declared explicitly, and it can change dynamically during the execution of the program.
 
 	In dynamically typed languages, the interpreter or runtime system infers the data type of a variable based on its current value and how it is being used in the program. This approach allows for more flexibility and faster development times since the programmer can change the type of a variable on the fly, without having to worry about type declarations or compiler errors.
@@ -624,6 +625,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 	    }()
 	    panic("test panic")
 	}
+	
 	```
 	
 	In this example, the foo function panics with a string message, but the deferred function uses recover to catch the panic and print a message. When the foo function is called, it will panic and print the message, but the program will not terminate and will resume normal execution after the deferred function completes.
