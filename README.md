@@ -1,5 +1,6 @@
 # Golang Interview Questions & Answers
 
+
 1. Write a program that prints the Fibonacci sequence up to a given number n.
 ```
 package main
@@ -88,21 +89,173 @@ func main() {
 	fmt.Println(nums)
 }
 ```
+
+### Without using sort package
+```
+package main
+
+import "fmt"
+
+func BubbleSort(array[] int)[]int {
+   for i:=0; i< len(array)-1; i++ {
+      for j:=0; j < len(array)-i-1; j++ {
+         if (array[j] > array[j+1]) {
+            array[j], array[j+1] = array[j+1], array[j]
+         }
+      }
+   }
+   return array
+}
+
+func main() {
+   array:= []int{11, 14, 3, 8, 18, 17, 43};
+   fmt.Println(BubbleSort(array))
+}
+
+```
 4. Write a program that takes a slice of strings and removes all duplicates.
+```
+package main
 
-5. Write a program that reads a file and counts the number of occurrences of each word in the file.
+import "fmt"
 
-6. Write a program that takes two slices of integers and returns a slice containing the intersection of the two slices.
+func removeDuplicates(strs []string) []string {
+	// Create a map to keep track of which elements have been seen before
+	seen := make(map[string]bool)
 
-7. Write a program that takes a string and checks whether it is a palindrome.
+	// Create a new slice to hold the unique elements
+	uniqueStrs := []string{}
 
-8. Write a program that generates a random number between 1 and 100 and asks the user to guess the number.
+	// Iterate over the input slice
+	for _, str := range strs {
+		// If we haven't seen this element before, add it to the new slice
+		if !seen[str] {
+			seen[str] = true
+			uniqueStrs = append(uniqueStrs, str)
+		}
+	}
 
-9. Write a program that takes a slice of integers and calculates the sum and average of the numbers.
+	// Return the new slice with duplicates removed
+	return uniqueStrs
+}
 
-10. Write a program that reads a CSV file and outputs the data as a table.
+func main() {
+	// Define a slice of strings with duplicates
+	strs := []string{"apple", "banana", "cherry", "apple", "banana"}
 
-11. What is Go, and why was it created?
+	// Remove duplicates from the slice
+	uniqueStrs := removeDuplicates(strs)
+
+	// Print the result
+	fmt.Println(uniqueStrs)
+}
+```
+5. Write a program that takes two slices of integers and returns a slice containing the intersection of the two slices.
+```
+package main
+
+import "fmt"
+
+func intersection(a, b []int) []int {
+    // Create a map to store the elements of the first slice
+    m := make(map[int]bool)
+    for _, x := range a {
+        m[x] = true
+    }
+
+    // Iterate over the elements of the second slice and add to result if in map
+    var res []int
+    for _, x := range b {
+        if m[x] {
+            res = append(res, x)
+        }
+    }
+
+    return res
+}
+
+func main() {
+    // Define two slices of integers
+    a := []int{1, 2, 3, 4, 5}
+    b := []int{3, 4, 5, 6, 7}
+
+    // Find the intersection of the two slices
+    c := intersection(a, b)
+
+    // Print the intersection
+    fmt.Println(c)
+}
+
+```
+
+6. Write a program that takes a string and checks whether it is a palindrome.
+```
+package main
+
+import "fmt"
+
+func isPalindrome(s string) bool {
+    // Convert the string to a slice of runes for efficient processing
+    r := []rune(s)
+
+    // Iterate over the characters, comparing those at opposite ends
+    for i := 0; i < len(r)/2; i++ {
+        if r[i] != r[len(r)-i-1] {
+            return false
+        }
+    }
+
+    return true
+}
+
+func main() {
+    // Test the isPalindrome function with some examples
+    fmt.Println(isPalindrome("racecar"))  // true
+    fmt.Println(isPalindrome("hello"))    // false
+    fmt.Println(isPalindrome("level"))    // true
+    fmt.Println(isPalindrome("rotator"))  // true
+}
+
+```
+
+7. Write a program that takes a slice of integers and calculates the sum and average of the numbers.
+```
+package main
+
+import "fmt"
+
+func calculateSumAndAverage(numbers []int) (int, float64) {
+    sum := 0
+    for _, num := range numbers {
+        sum += num
+    }
+    average := float64(sum) / float64(len(numbers))
+    return sum, average
+}
+
+func main() {
+    numbers := []int{1, 2, 3, 4, 5}
+    sum, average := calculateSumAndAverage(numbers)
+    fmt.Printf("Sum: %d, Average: %.2f", sum, average)
+}
+
+```
+9. What is Go, and why was it created?
+
+Go, also known as Golang, is an open-source programming language developed by Google. It was first publicly announced in November 2009, and the first stable version, Go 1.0, was released in March 2012.
+
+Go was created to address some of the shortcomings of existing programming languages, such as C and C++, by providing a more modern and efficient language that can handle large-scale software development projects. The language was designed with the following goals in mind:
+
+Simplicity: Go is designed to be simple and easy to learn, with a minimalistic syntax and a concise set of features that allow developers to write efficient and readable code.
+
+Performance: Go is designed to be fast and efficient, with built-in support for concurrency and garbage collection that make it well-suited for modern software development.
+
+Safety: Go includes features that make it easy to write safe and secure code, including strong typing, memory safety, and garbage collection.
+
+Openness: Go is an open-source language, with a vibrant community of developers and contributors who are constantly working to improve the language and its ecosystem.
+
+Overall, Go was created to provide a modern and efficient language that can handle the challenges of large-scale software development, while still being simple and easy to learn. Its popularity has grown rapidly in recent years, with many companies and developers using it for a wide range of applications, including web development, systems programming, and machine learning.
+
 12. How does garbage collection work in Go, and what are some advantages and disadvantages of Go's garbage collector?
 13. What are channels in Go, and how are they used?
 14. How do you handle errors in Go, and what are some best practices for error handling?
