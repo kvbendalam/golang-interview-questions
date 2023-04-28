@@ -930,5 +930,47 @@ func main() {
 }
 ```
 
+42. Create a Employee struct and write an interface to print the all salaries of the employees from slice of Employee struct
 
+```
+// You can edit this code!
+// Click here and start typing.
+package main
+
+import (
+	"fmt"
+)
+
+type Employee struct {
+	Name     string
+	Team     string
+	Projects string
+	Salary   string
+}
+
+type manageEmployee interface {
+	getSalary()
+}
+
+func (sal salaryPrinter) getSalary() {
+	for i, v := range sal.employee {
+		fmt.Println("Salary ", i, "is :", v.Salary)
+	}
+}
+
+type salaryPrinter struct {
+	employee []Employee
+}
+
+func main() {
+	var employees []Employee
+	employees = append(employees, Employee{"Krishna", "Apex", "Go", "10000"})
+	employees = append(employees, Employee{"Vamsi", "Cloud", "Docker", "20000"})
+
+	salary := salaryPrinter{employees}
+	salary.getSalary()
+
+}
+
+```
 
