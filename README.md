@@ -865,7 +865,7 @@ It is important to note that panics are only used for unrecoverable errors, and 
 
 41. Create Employee, Manager, and Project struct and define a interface to add projects, and print project details.
 
-// You can edit this code!
+```// You can edit this code!
 // Click here and start typing.
 package main
 
@@ -928,6 +928,7 @@ func main() {
 	fmt.Println(string(res))
 
 }
+```
 
 
 
