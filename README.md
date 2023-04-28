@@ -863,6 +863,71 @@ It is important to note that panics are only used for unrecoverable errors, and 
 
 
 
+41. Create Employee, Manager, and Project struct and define a interface to add projects, and print project details.
+
+// You can edit this code!
+// Click here and start typing.
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type Employee struct {
+	Name     string
+	Team     string
+	Projects Project
+	Salary   string
+}
+
+type Manager struct {
+	Name       string
+	Salary     string
+	TeamMember []Employee
+}
+
+type Project struct {
+	Name         string
+	Technologies []string
+}
+
+type manageEmployee interface {
+	getProjects()
+	addProjects()
+	getSalary()
+	getTeammember()
+}
+
+func (e *Employee) getProjects() Project {
+	return e.Projects
+}
+
+func (p *Project) addProjects(tech []string) []string {
+	for _, v := range tech {
+		p.Technologies = append(p.Technologies, v)
+	}
+	return p.Technologies
+}
+
+func main() {
+
+	pq := Project{Name: "My Project", Technologies: []string{}}
+
+	pq.addProjects([]string{"Go", "Docker"})
+
+	emp := Employee{"Krishna", "Apex", pq, "10000"}
+	proj := emp.getProjects()
+
+	res, err := json.Marshal(&emp)
+
+	if err != nil {
+		fmt.Println("Error while marshaling")
+	}
+
+	fmt.Println(string(res))
+
+}
 
 
 
